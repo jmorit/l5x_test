@@ -579,8 +579,8 @@ class Structure(Data):
         :param value: dictionary of values to put in structure
         """
         if datatype not in project.datatypes:
-            print parent.tagName
-            print parent.getAttribute('Name')
+            print (parent.tagName)
+            print (parent.getAttribute('Name'))
             raise ValueError("Datatype {} not found in datatypes".format(datatype))
         else:
             project_datatype = project.datatypes[datatype]
