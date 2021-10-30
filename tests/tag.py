@@ -71,7 +71,7 @@ class Tag(ElementAccess):
     tag_type = AttributeDescriptor('TagType', True)
     data_type = AttributeDescriptor('DataType', True)
     alias_for = AttributeDescriptor('AliasFor')
-    value = AttributeDescriptor('value')
+    value = TagDataDescriptor('Value')
     shape = TagDataDescriptor('shape')
     names = TagDataDescriptor('names')
     producer = ConsumeDescriptor('Producer')
