@@ -271,11 +271,13 @@ class ElementDict(ElementAccess):
     
     :param parent: Parent element that is associated with the dictionary
     :param key_attr: Attribute to be used as the dictionary key. If this is None then sequential numbers will be used.
+    :value_type
     :param types: A dictionary used to look up the class to be used for a particular key. A single type can be supplied which will always the same type of class.
     :param type_attr: An attribute can be used to lookup the type of class to return. The value of the attribute will match the key of types.
     :param dfl_type: If the type cannot be found with the types dictionary, the default type will be returned.
     :param key_type: In the case where the primary key isn't a string, this is used to define it
     :param member_args: Additional parameters to pass to the constructor when returning the instance.
+    :value_args
     :param use_tag_filter: Select only the child elements which have the this XML element name.
     :param tag_filter: Select only the child elements which have this XML element name.
     :param use_tagname: Use the element name to determine the type of object to return instead of *key_attr*
@@ -285,11 +287,13 @@ class ElementDict(ElementAccess):
 
     def __init__(self, parent, \
                  key_attr=None, \
+                 value_type=None, \ "JM MOD
                  types=None, \
                  type_attr=None, \
                  dfl_type=None,
                  key_type=str, \
                  member_args=[], \
+                 value_args=[], \ "JM MOD
                  tag_filter=None, \
                  use_tagname=False, \
                  attr_filter=None):
@@ -349,6 +353,24 @@ class ElementDict(ElementAccess):
                 type_name = key            
             return self.types.get(type_name, self.dfl_type)(*args)
 
+    "Mod JM"
+    def create_value_object(self, element):
+        """Instantiates an object returned as the value."""
+        args = [element]
+        args.extend(self.value_args)
+
+        # Use the same type for all child objects if the given value type
+        # is a class.
+        try:
+            return self.value_type(*args)
+
+        # If the value type is a mapping, use the given attribute to select
+        # the appropriate type.
+        except TypeError:
+            type_name = element.attrib[self.type_attr]
+            return self.value_type.get(type_name, self.dfl_type)(*args)
+    "Fin Mod JM"
+    
     def __delitem__(self, key):
         """Delete a child element by key"""
         try:
