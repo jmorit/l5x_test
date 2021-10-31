@@ -287,13 +287,13 @@ class ElementDict(ElementAccess):
 
     def __init__(self, parent, \
                  key_attr=None, \
-                 value_type=None, \ "JM MOD
+                 value_type=None, \
                  types=None, \
                  type_attr=None, \
                  dfl_type=None,
                  key_type=str, \
                  member_args=[], \
-                 value_args=[], \ "JM MOD
+                 value_args=[], \
                  tag_filter=None, \
                  use_tagname=False, \
                  attr_filter=None):
