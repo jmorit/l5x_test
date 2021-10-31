@@ -1,6 +1,6 @@
 from setuptools import setup
 
-setup(name='l5x_jm',
+setup(name='l5x',
       version='1.5',
       author='Jason Valenzuela',
       author_email='jvalenzuela1977@gmail.com',
